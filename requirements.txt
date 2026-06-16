@@ -3,3 +3,6 @@ pyod
 scikit-learn
 openpyxl
 streamlit
+fastapi
+uvicorn
+stripe
