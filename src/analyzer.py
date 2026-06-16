@@ -116,6 +116,14 @@ if __name__ == "__main__":
     data_dir = "data"
     if os.path.exists(data_dir):
         for file in os.listdir(data_dir):
+            file_path = os.path.join(data_dir, file)
+            
+            # 1. Skip directories and empty placeholder files
+            if os.path.isdir(file_path) or os.getsize(file_path) == 0:
+                continue
+                
+            # 2. Only run the AI engine on actual data extensions
             if file.endswith(".csv") or file.endswith(".xlsx"):
-                analyze_data(os.path.join(data_dir, file))
+                analyze_data(file_path)
                 break
+
