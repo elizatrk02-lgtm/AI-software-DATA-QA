@@ -31,6 +31,11 @@ jobs:
     - name: Run AI Data Analyzer
       run: python src/analyzer.py
 
+    - name: Run Automated Unit Tests
+      run: |
+        pip install pytest
+        pytest tests/
+
     - name: Deploy Dashboard
       if: always()
       uses: peaceiris/actions-gh-pages@v4
