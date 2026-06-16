@@ -32,7 +32,7 @@ st.markdown("""
             background-color: #fafafa;
         }
     </style>
-""", unsafe_with_html_allowed=True)
+""", unsafe_allow_html=True)
 
 # Helper functions for the data logic
 def clean_data(df):
@@ -47,25 +47,25 @@ def clean_data(df):
     return df_clean
 
 # --- SIDEBAR (Conversational & Account Control) ---
-st.sidebar.markdown("<h2 style='text-align: center; color: #10a37f;'>⚡ DataQA AI</h2>", unsafe_with_html_allowed=True)
+st.sidebar.markdown("<h2 style='text-align: center; color: #10a37f;'>⚡ DataQA AI</h2>", unsafe_allow_html=True)
 st.sidebar.markdown("---")
 st.sidebar.markdown("🤖 **AI Assistant Active**")
 st.sidebar.caption("Model: IsolationForest-v1.0")
 
 # Session History Tracker
-st.sidebar.markdown("<br><b>Recent Workspace Scans</b>", unsafe_with_html_allowed=True)
+st.sidebar.markdown("<br><b>Recent Workspace Scans</b>", unsafe_allow_html=True)
 st.sidebar.caption("📁 No active history. Upload a dataset to begin.")
 
 # Monetization Hook Footer
-st.sidebar.markdown("<br><br><br>---", unsafe_with_html_allowed=True)
-st.sidebar.markdown("<div style='font-size: 14px; font-weight:bold;'>🚀 Upgrade Workspace</div>", unsafe_with_html_allowed=True)
+st.sidebar.markdown("<br><br><br>---", unsafe_allow_html=True)
+st.sidebar.markdown("<div style='font-size: 14px; font-weight:bold;'>🚀 Upgrade Workspace</div>", unsafe_allow_html=True)
 st.sidebar.caption("Unlock automated API streaming webhooks and premium enterprise SLA rules.")
 if st.sidebar.button("Get Plus ($49/mo)", use_container_width=True):
     st.sidebar.success("🔗 Redirecting securely to Stripe checkout...")
 
 # --- MAIN HERO CONTAINER (ChatGPT Layout) ---
-st.markdown("<h1 style='text-align: center; margin-top: 50px; font-size: 42px;'>How can I clean your data today?</h1>", unsafe_with_html_allowed=True)
-st.markdown("<p style='text-align: center; color: #6e6e80; font-size: 16px; margin-bottom: 40px;'>Upload any messy dataset to instantly target structural gaps, loops, and statistical anomalies.</p>", unsafe_with_html_allowed=True)
+st.markdown("<h1 style='text-align: center; margin-top: 50px; font-size: 42px;'>How can I clean your data today?</h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #6e6e80; font-size: 16px; margin-bottom: 40px;'>Upload any messy dataset to instantly target structural gaps, loops, and statistical anomalies.</p>", unsafe_with_html_allowed=False) # standard streamlit parameter fallback
 
 # Grid Layout for Features (Aesthetic Only, mimics the prompt cards)
 col1, col2 = st.columns(2)
@@ -75,16 +75,16 @@ with col1:
             <div class="feature-title">🔍 Scan Gaps & Formats</div>
             <div class="feature-desc">Detect empty rows, trace pattern errors, and validate emails or phone entries dynamically.</div>
         </div>
-    """, unsafe_with_html_allowed=True)
+    """, unsafe_allow_html=True)
 with col2:
     st.markdown("""
         <div class="feature-card">
             <div class="feature-title">🧠 Train Unsupervised AI</div>
             <div class="feature-desc">Leverage Isolation Forest models to flag malicious entries or corrupted variables out of line.</div>
         </div>
-    """, unsafe_with_html_allowed=True)
+    """, unsafe_allow_html=True)
 
-st.markdown("<br>", unsafe_with_html_allowed=True)
+st.markdown("<br>", unsafe_allow_html=True)
 
 # 2. Centered Interactive Drag-and-Drop Dropzone
 uploaded_file = st.file_uploader("", type=["csv", "xlsx"], label_visibility="collapsed")
@@ -133,7 +133,7 @@ if uploaded_file is not None:
             st.info("No deep-layer statistical outliers found.")
 
     # Auto-Fixing Engine Export Node (Pristine execution)
-    st.markdown("<br>", unsafe_with_html_allowed=True)
+    st.markdown("<br>", unsafe_allow_html=True)
     st.write("✨ **Action Optimized:** I have compiled a sanitized, structurally complete version of this dataset.")
     
     df_fixed = clean_data(df.drop(columns=['anomaly'], errors='ignore'))
