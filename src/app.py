@@ -4,12 +4,13 @@ import numpy as np
 import os
 from pyod.models.iforest import IsolationForest
 
-# Visualization & Advanced Math Stack
+# Visualization & Comprehensive Math Stack
 import matplotlib.pyplot as plt
 import seaborn as sns
 from scipy import stats
+from sklearn.linear_model import LinearRegression
 
-# 1. Custom CSS styling to force a clean, minimalist layout matching ChatGPT's aesthetic
+# 1. Custom CSS styling matching ChatGPT UI
 st.set_page_config(page_title="DataQA AI", page_icon="⚡", layout="centered")
 
 st.markdown("""
@@ -51,8 +52,8 @@ def clean_data(df):
 # --- SIDEBAR ---
 st.sidebar.markdown("<h2 style='text-align: center; color: #10a37f;'>⚡ DataQA AI</h2>", unsafe_allow_html=True)
 st.sidebar.markdown("---")
-st.sidebar.markdown("🤖 **AI & Math Engine Active**")
-st.sidebar.caption("Statistical Modules: SciPy / Seaborn / PyOD")
+st.sidebar.markdown("🤖 **AI, Math, & Inference Active**")
+st.sidebar.caption("Modules: SciPy Stats / Scikit-Learn Regression")
 
 st.sidebar.markdown("<br><br><br>---", unsafe_allow_html=True)
 st.sidebar.markdown("<div style='font-size: 14px; font-weight:bold;'>🚀 Upgrade Workspace</div>", unsafe_allow_html=True)
@@ -61,13 +62,13 @@ if st.sidebar.button("Get Plus ($49/mo)", use_container_width=True):
 
 # --- MAIN HERO CONTAINER ---
 st.markdown("<h1 style='text-align: center; margin-top: 50px; font-size: 42px;'>How can I clean your data today?</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: #6e6e80; font-size: 16px; margin-bottom: 40px;'>Upload any dataset to run instant ML anomaly detection and comprehensive statistical graphs.</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #6e6e80; font-size: 16px; margin-bottom: 40px;'>Upload any dataset to run advanced regression lines, distribution models, and inference tests.</p>", unsafe_allow_html=True)
 
 col1, col2 = st.columns(2)
 with col1:
-    st.markdown('<div class="feature-card"><div class="feature-title">📊 Statistical Mapping</div><div class="feature-desc">Compute skewness, kurtosis, distributions, and multi-variable correlation plots instantly.</div></div>', unsafe_allow_html=True)
+    st.markdown('<div class="feature-card"><div class="feature-title">📈 Trendlines & Regressions</div><div class="feature-desc">Isolate dependencies, establish correlation margins, and predict numeric targets.</div></div>', unsafe_allow_html=True)
 with col2:
-    st.markdown('<div class="feature-card"><div class="feature-title">🧠 Advanced AI Diagnostics</div><div class="feature-desc">Run Isolation Forest modeling gates to target non-linear outliers across columns.</div></div>', unsafe_allow_html=True)
+    st.markdown('<div class="feature-card"><div class="feature-title">🧪 Parametric Hypothesis Testing</div><div class="feature-desc">Compute comparative metrics between groupings automatically using ANOVA or T-tests.</div></div>', unsafe_allow_html=True)
 
 st.markdown("<br>", unsafe_allow_html=True)
 uploaded_file = st.file_uploader("", type=["csv", "xlsx"], label_visibility="collapsed")
@@ -76,107 +77,114 @@ if uploaded_file is not None:
     st.markdown("---")
     st.markdown(f"### 💬 DataQA Assistant")
     
-    with st.spinner("Processing dimensions and mapping matrix coordinates..."):
-        if uploaded_file.name.endswith('.xlsx'):
-            df = pd.read_excel(uploaded_file, engine='openpyxl')
-        else:
-            df = pd.read_csv(uploaded_file)
-            
-        gaps = df.isnull().sum().sum()
-        dup_count = df.duplicated().sum()
+    if uploaded_file.name.endswith('.xlsx'):
+        df = pd.read_excel(uploaded_file, engine='openpyxl')
+    else:
+        df = pd.read_csv(uploaded_file)
         
-        num_cols = df.select_dtypes(include=['float64', 'int64']).columns
-        anomaly_count = 0
-        anomalies_df = pd.DataFrame()
-        
-        if len(num_cols) > 0:
-            df_clean_num = df[num_cols].fillna(0)
-            clf = IsolationForest(contamination=0.05)
-            clf.fit(df_clean_num)
-            df['anomaly'] = clf.labels_
-            anomalies_df = df[df['anomaly'] == -1]
-            anomaly_count = len(anomalies_df)
+    gaps = df.isnull().sum().sum()
+    dup_count = df.duplicated().sum()
+    
+    num_cols = df.select_dtypes(include=['float64', 'int64']).columns
+    cat_cols = df.select_dtypes(include=['object', 'category']).columns
+    anomaly_count = 0
+    anomalies_df = pd.DataFrame()
+    
+    if len(num_cols) > 0:
+        df_clean_num = df[num_cols].fillna(0)
+        clf = IsolationForest(contamination=0.05)
+        clf.fit(df_clean_num)
+        df['anomaly'] = clf.labels_
+        anomalies_df = df[df['anomaly'] == -1]
+        anomaly_count = len(anomalies_df)
 
-    st.write(f"Injected **{uploaded_file.name}** containing **{len(df)} records**. Analysis complete:")
+    st.write(f"Inverted **{uploaded_file.name}** containing **{len(df)} records**. Workspace metrics generated below:")
     
     m1, m2, m3 = st.columns(3)
-    m1.metric("Structural Gaps", f"{gaps} entries missing")
+    m1.metric("Structural Gaps", f"{gaps} entries")
     m2.metric("Duplicated Records", f"{dup_count} loops")
     m3.metric("AI Flagged Outliers", f"{anomaly_count} variants")
 
     # =========================================================================
-    # NEW STEP: COMPREHENSIVE STATISTICAL INTELLIGENCE GRID
+    # CORE UPGRADE BLOCK: HIGHER LEVEL INFERENCE & REGRESSION INTERACTIVE MODULES
     # =========================================================================
-    with st.expander("📈 Advanced Statistical Analytics & Math Breakdown", expanded=True):
-        if len(num_cols) > 0:
-            st.markdown("#### 🔢 Descriptives & Higher-Order Moments")
+    
+    # Section A: Predictive Trendlines and Regression Modeling
+    with st.expander("📈 Predictive Trendlines & Correlation Regression Models", expanded=True):
+        if len(num_cols) >= 2:
+            st.markdown("#### 📉 Dynamic Single-Variable Ordinary Least Squares (OLS)")
+            x_var = st.selectbox("Select Independent Variable (X-Axis):", num_cols, index=0)
+            y_var = st.selectbox("Select Target Dependent Variable (Y-Axis):", num_cols, index=min(1, len(num_cols)-1))
             
-            # Mathematical summary dataframe generation
-            stats_summary = []
-            for col in num_cols:
-                col_data = df[col].dropna()
-                if len(col_data) > 1:
-                    skew = stats.skew(col_data)
-                    kurt = stats.kurtosis(col_data)
-                    stats_summary.append({
-                        "Column Metric": col,
-                        "Mean (μ)": f"{col_data.mean():.2f}",
-                        "Median": f"{col_data.median():.2f}",
-                        "Std Dev (σ)": f"{col_data.std():.2f}",
-                        "Skewness": f"{skew:.2f}",
-                        "Kurtosis": f"{kurt:.2f}"
-                    })
+            # Drop empty coordinates to fit pure matrix boundaries
+            reg_df = df[[x_var, y_var]].dropna()
             
-            if stats_summary:
-                st.dataframe(pd.DataFrame(stats_summary), use_container_width=True, hide_index=True)
-            
-            st.markdown("#### 📊 Automated Distribution Graphing")
-            # Select target metric row to render graphs dynamically
-            selected_col = st.selectbox("Select metric column to graph:", num_cols)
-            
-            fig, ax = plt.subplots(1, 2, figsize=(12, 4))
-            clean_col_data = df[selected_col].dropna()
-            
-            # Plot 1: Histogram & KDE (Continuous distribution curve)
-            sns.histplot(clean_col_data, kde=True, ax=ax[0], color="#10a37f")
-            ax[0].set_title(f"Distribution Shape for {selected_col}")
-            ax[0].set_xlabel(selected_col)
-            
-            # Plot 2: Box & Whisker Plot (Statistical range dispersion mapping)
-            sns.boxplot(x=clean_col_data, ax=ax[1], color="#1e1e2f")
-            ax[1].set_title(f"Box Plot Range Interquartiles")
-            ax[1].set_xlabel(selected_col)
-            
-            st.pyplot(fig)
-            plt.close()
-
-            # Plot 3: Multi-variable Matrix Correlation (if 2 or more columns exist)
-            if len(num_cols) >= 2:
-                st.markdown("#### 🔗 Relational Linear Correlation Matrix")
-                fig_corr, ax_corr = plt.subplots(figsize=(6, 4))
-                corr_matrix = df[num_cols].corr()
-                sns.heatmap(corr_matrix, annot=True, cmap="viridis", fmt=".2f", ax=ax_corr, cbar=True)
-                ax_corr.set_title("Pearson Correlation Coefficients (r)")
-                st.pyplot(fig_corr)
+            if len(reg_df) > 3:
+                X = reg_df[[x_var]].values
+                y = reg_df[y_var].values
+                
+                model = LinearRegression()
+                model.fit(X, y)
+                predictions = model.predict(X)
+                r_squared = model.score(X, y)
+                
+                # Visual output rendering
+                fig_reg, ax_reg = plt.subplots(figsize=(7, 3.5))
+                sns.scatterplot(data=reg_df, x=x_var, y=y_var, ax=ax_reg, color="#1e1e2f", alpha=0.7, label="Data Records")
+                ax_reg.plot(reg_df[x_var], predictions, color="#10a37f", linewidth=2.5, label=f"Trendline (R² = {r_squared:.2f})")
+                ax_reg.set_title(f"Linear Relationship: {y_var} vs {x_var}")
+                ax_reg.legend()
+                st.pyplot(fig_reg)
                 plt.close()
+                
+                st.caption(f"**Mathematical Model Interpretation:** For every single unit increment in *{x_var}*, *{y_var}* is expected to shift by **{model.coef_[0]:.4f}** units (Intercept: {model.intercept_:.2f}).")
+            else:
+                st.info("Insufficient valid non-null vector points to calculate linear alignment coefficients.")
         else:
-            st.info("No quantitative floating fields found to run multi-moment calculations.")
+            st.info("Predictive regressions demand a minimum layout configuration of 2 numerical column variables.")
 
-    # --- CORE WORKSPACE ACTIONS ---
+    # Section B: Comparative Inference Hypothesis Testing (T-Tests / ANOVA)
+    with st.expander("🧪 Comparative Inference Testing (t-Test / ANOVA Matrix Gates)", expanded=False):
+        if len(num_cols) > 0 and len(cat_cols) > 0:
+            st.markdown("#### 🔬 Evaluate Categorical Influence on Continuous Targets")
+            selected_cat = st.selectbox("Select Categorical Group Vector:", cat_cols)
+            selected_num = st.selectbox("Select Target Measurement Array:", num_cols)
+            
+            # Structure subsets inside variable array categories
+            clean_test_df = df[[selected_cat, selected_num]].dropna()
+            groups = clean_test_df[selected_cat].unique()
+            
+            group_arrays = [clean_test_df[clean_test_df[selected_cat] == g][selected_num].values for g in groups]
+            group_counts = [len(arr) for arr in group_arrays]
+            
+            # Enforce validation boundary: Ensure each group matrix features at least two rows
+            if len(groups) >= 2 and min(group_counts) >= 2:
+                if len(groups) == 2:
+                    st.markdown(f"##### 📊 Running Independent Two-Sample Student's t-Test")
+                    t_stat, p_val = stats.ttest_ind(group_arrays[0], group_arrays[1], equal_var=False)
+                    st.write(f"Comparing Category **{groups[0]}** vs **{groups[1]}** across **{selected_num}**:")
+                    st.metric("Calculated p-Value Probability", f"{p_val:.5f}")
+                else:
+                    st.markdown(f"##### 📊 Running One-Way Analysis of Variance (ANOVA)")
+                    f_stat, p_val = stats.f_oneway(*group_arrays)
+                    st.write(f"Evaluating across **{len(groups)} discrete categories** within variable array *{selected_cat}*:")
+                    st.metric("Calculated ANOVA p-Value", f"{p_val:.5f}")
+                
+                # Decipher hypothesis benchmarks for operators
+                if p_val < 0.05:
+                    st.success(f"🎉 **Statistically Significant Relationship (p < 0.05):** The structural groupings within *{selected_cat}* exert a highly meaningful impact on the distribution variances of *{selected_num}*.")
+                else:
+                    st.warning(f"⚖️ **No Statistical Divergence (p ≥ 0.05):** The baseline variances observed between classifications appear mathematically matching. Variation is likely down to random distribution noise.")
+            else:
+                st.info("The selected grouping does not feature enough data variations or unique classification paths to run parametric tests.")
+        else:
+            st.info("Hypothesis matrix gates require at least 1 Categorical field and 1 Quantitative numerical field to initiate split profiling columns.")
+
+    # =========================================================================
+    # CORE PIPELINE SECTIONS
+    # =========================================================================
     with st.expander("📊 Inspect Raw AI Anomalies"):
         if anomaly_count > 0:
             st.dataframe(anomalies_df[num_cols], use_container_width=True)
         else:
             st.info("No algorithmic outliers logged.")
-
-    st.markdown("<br>", unsafe_allow_html=True)
-    df_fixed = clean_data(df.drop(columns=['anomaly'], errors='ignore'))
-    csv_clean = df_fixed.to_csv(index=False).encode('utf-8')
-    
-    st.download_button(
-        label="📥 Export Cleaned Operational File",
-        data=csv_clean,
-        file_name=f"clean_{uploaded_file.name}",
-        mime="text/csv",
-        use_container_width=True
-    )
