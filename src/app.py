@@ -86,3 +86,9 @@ if uploaded_file is not None:
         file_name=f"clean_{uploaded_file.name}",
         mime="text/csv"
     )
+# Insert into src/app.py beneath the download engine layout:
+st.sidebar.markdown("---")
+st.sidebar.subheader("🌟 Go Premium")
+st.sidebar.write("Unlock unlimited automated schema checking, direct API connectivity, and custom Slack error webhooks.")
+if st.sidebar.button("Upgrade to Premium ($49/mo)"):
+    st.sidebar.info("🔗 [Click here to complete payment via Stripe Checkout](https://stripe.com)")
