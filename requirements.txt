@@ -10,4 +10,5 @@ pytest
 matplotlib
 seaborn
 scipy
+reportlab
 
