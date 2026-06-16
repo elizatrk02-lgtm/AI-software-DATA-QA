@@ -1,0 +1,7 @@
+customer_id,customer_name,customer_email,phone_number,monthly_spend
+C101,John Doe,john.doe@email.com,+123456789,150.00
+C102, Jane Smith ,jane.smith@email.com,555-1234,220.50
+C102, Jane Smith ,jane.smith@email.com,555-1234,220.50
+C103,Bob Johnson,bob.johnson_email.com,+198765432,95.00
+C104,Alice Brown,alice@email.com,not-a-number,310.00
+C105,Charlie Green,charlie@email.com,+112233445,99999.00
