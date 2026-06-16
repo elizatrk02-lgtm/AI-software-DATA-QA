@@ -65,7 +65,7 @@ if st.sidebar.button("Get Plus ($49/mo)", use_container_width=True):
 
 # --- MAIN HERO CONTAINER (ChatGPT Layout) ---
 st.markdown("<h1 style='text-align: center; margin-top: 50px; font-size: 42px;'>How can I clean your data today?</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: #6e6e80; font-size: 16px; margin-bottom: 40px;'>Upload any messy dataset to instantly target structural gaps, loops, and statistical anomalies.</p>", unsafe_with_html_allowed=False) # standard streamlit parameter fallback
+st.markdown("<p style='text-align: center; color: #6e6e80; font-size: 16px; margin-bottom: 40px;'>Upload any messy dataset to instantly target structural gaps, loops, and statistical anomalies.</p>", unsafe_allow_html=True)
 
 # Grid Layout for Features (Aesthetic Only, mimics the prompt cards)
 col1, col2 = st.columns(2)
