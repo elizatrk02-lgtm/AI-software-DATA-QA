@@ -3,7 +3,10 @@ name: Data QA Runner
 on:
   push:
     paths:
-      - 'data/**' # Runs automatically whenever data files change
+      - 'data/**'
+
+permissions:
+  contents: write
 
 jobs:
   run-ai-qa:
@@ -24,3 +27,9 @@ jobs:
 
     - name: Run AI Data Analyzer
       run: python src/analyzer.py
+
+    - name: Deploy Dashboard to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./public
